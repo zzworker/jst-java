@@ -41,6 +41,17 @@ jst:
   credential:
     app-key: Your App Key
     app-secret: Your App Secret
+  token-store:
+    # 默认为 caffeine
+    type: jedis
+    # 当仅当 type 为 jedis 时需要配置
+    jedis:
+      host: 127.0.0.1
+      port: 6379
+      database: 0
+      user: redis user
+      password: redis password
+      sslEnabled: true
 ```
 
 自定义 `JstClient`：

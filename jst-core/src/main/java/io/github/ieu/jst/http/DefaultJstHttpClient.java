@@ -1,6 +1,7 @@
 package io.github.ieu.jst.http;
 
 import io.github.ieu.jst.JstClientException;
+import io.github.ieu.jst.http.converter.Jackson2JsonJstHttpMessageConverter;
 import io.github.ieu.jst.type.TypeFactory;
 import io.github.ieu.jst.type.TypeReference;
 import lombok.Getter;
@@ -85,6 +86,13 @@ public class DefaultJstHttpClient implements JstHttpClient {
     @SuppressWarnings("unchecked")
     private <T> T readResponse(JstHttpResponse response, Type targetType) throws IOException {
         JstMediaType contentType = response.getHeaders().getContentType();
+        
+        // 如果contentType为null，尝试查找JSON转换器优先处理
+        if (contentType == null) {
+            contentType = JstMediaType.APPLICATION_JSON;
+        }
+        
+        // 常规处理流程
         for (JstHttpMessageConverter<?> converter : httpMessageConverters) {
             if (converter instanceof JstGenericHttpMessageConverter<?>) {
                 if (((JstGenericHttpMessageConverter<?>) converter).canRead(targetType, contentType)) {

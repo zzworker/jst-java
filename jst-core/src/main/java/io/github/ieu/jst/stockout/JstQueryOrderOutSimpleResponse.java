@@ -324,7 +324,7 @@ public class JstQueryOrderOutSimpleResponse {
             /**
              * 数据库行版本号：https://docs.microsoft.com/zh-cn/sql/t-sql/data-types/rowversion-transact-sql?view=sql-server-ver16
              */
-            private Integer ts;
+            private Long ts;
 
             /**
              * 跨境订单买家指定物流（is_get_cblogistic传true返回）

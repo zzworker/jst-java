@@ -404,7 +404,7 @@ public class JstQuerySingleOrderResponse {
             /**
              * 数据库行版本号：https://docs.microsoft.com/zh-cn/sql/t-sql/data-types/rowversion-transact-sql?view=sql-server-ver16
              */
-            private Integer ts;
+            private Long ts;
 
             /**
              * 买家ID（系统根据shop_buy_id生成的）

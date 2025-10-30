@@ -52,5 +52,5 @@ public class JstQueryInventoryRequest {
     /**
      * 时间戳，防漏单，如果用ts查询不需要传时间查询条件
      */
-    private Integer ts;
+    private Long ts;
 }

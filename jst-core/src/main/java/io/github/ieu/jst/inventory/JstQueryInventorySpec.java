@@ -85,7 +85,7 @@ public class JstQueryInventorySpec {
     /**
      * 时间戳，防漏单，如果用ts查询不需要传时间查询条件
      */
-    public JstQueryInventorySpec ts(Integer ts) {
+    public JstQueryInventorySpec ts(Long ts) {
         requestBuilder.ts(ts);
         return this;
     }

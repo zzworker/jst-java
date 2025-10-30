@@ -91,7 +91,7 @@ public class JstPayQueryAsModifiedAfterSaleResponse {
             /**
              * 分页用时间戳
              */
-            private Integer ts;
+            private Long ts;
         }
     }
 }

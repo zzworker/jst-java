@@ -49,7 +49,7 @@ public class JstQueryInventoryResponse {
             /**
              * 时间戳
              */
-            private Integer ts;
+            private Long ts;
 
             /**
              * 款式编码

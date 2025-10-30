@@ -112,4 +112,16 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <distributionManagement>
+        <repository>
+            <id>mtc-maven</id>
+            <name>Aliyun Maven Repository</name>
+            <url>https://packages.aliyun.com/67344699cc7f222f53c86a63/maven/mtc-maven</url>
+        </repository>
+        <snapshotRepository>
+            <id>mtc-maven</id>
+            <name>Aliyun Maven Snapshot Repository</name>
+            <url>https://packages.aliyun.com/67344699cc7f222f53c86a63/maven/mtc-maven</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

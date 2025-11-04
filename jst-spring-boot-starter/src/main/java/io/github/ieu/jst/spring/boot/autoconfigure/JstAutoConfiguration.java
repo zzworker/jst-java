@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnClass(JstClient.class)
 @EnableConfigurationProperties(JstConfigurationProperties.class)
-@ConditionalOnProperty(prefix = JstConfigurationProperties.PROPERTY_PREFIX, name = "enabled", matchIfMissing = true)
+@ConditionalOnProperty(name = JstConfigurationProperties.PROPERTY_PREFIX + ".enabled", matchIfMissing = true)
 public class JstAutoConfiguration {
 
     @Bean
@@ -83,6 +83,9 @@ public class JstAutoConfiguration {
                 break;
             }
         }
+
+        // 设置调试模式
+        builder.debugEnabled(properties.isDebugEnabled());
 
         customizers.orderedStream().forEach(customizer -> customizer.customize(builder));
         return builder.build();

@@ -6,6 +6,7 @@ import io.github.ieu.jst.auth.caffeine.CaffeineJstTokenStoreFactory;
 import io.github.ieu.jst.http.DefaultJstHttpClientFactory;
 import io.github.ieu.jst.http.JstHttpClient;
 import io.github.ieu.jst.http.JstHttpClientFactory;
+import io.github.ieu.jst.http.DebugJstHttpClientWrapper;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class JstConfiguration {
     private JstHttpClient httpClient;
     private JstTokenStore tokenStore;
     private JstJsonSerializer jsonSerializer;
+    private boolean debugEnabled;
 
     public static Builder builder() {
         return new Builder();
@@ -41,6 +43,7 @@ public class JstConfiguration {
         private JstHttpClientFactory httpClientFactory;
         private JstTokenStoreFactory tokenStoreFactory;
         private JstJsonSerializerFactory jsonSerializerFactory;
+        private boolean debugEnabled;
 
         public Builder credential(String appKey, String appSecret) {
             return this.credential(new JstCredential(appKey, appSecret));
@@ -82,7 +85,21 @@ public class JstConfiguration {
             if (httpClientFactory == null) {
                 httpClientFactory = new DefaultJstHttpClientFactory();
             }
-            configuration.setHttpClient(httpClientFactory.create());
+            // 先创建JsonSerializer，调试包装器可能需要用到
+            JstJsonSerializerFactory jsonSerializerFactory = this.jsonSerializerFactory;
+            if (jsonSerializerFactory == null) {
+                jsonSerializerFactory = new Jackson2JstJsonSerializerFactory();
+            }
+            JstJsonSerializer jsonSerializer = jsonSerializerFactory.create();
+            
+            JstHttpClient httpClient = httpClientFactory.create();
+            
+            // 如果启用调试模式，使用调试包装器
+            if (this.debugEnabled) {
+                httpClient = new DebugJstHttpClientWrapper(httpClient, jsonSerializer);
+            }
+            
+            configuration.setHttpClient(httpClient);
 
             JstTokenStoreFactory tokenStoreFactory = this.tokenStoreFactory;
             if (tokenStoreFactory == null) {
@@ -90,11 +107,9 @@ public class JstConfiguration {
             }
             configuration.setTokenStore(tokenStoreFactory.create());
 
-            JstJsonSerializerFactory jsonSerializerFactory = this.jsonSerializerFactory;
-            if (jsonSerializerFactory == null) {
-                jsonSerializerFactory = new Jackson2JstJsonSerializerFactory();
-            }
-            configuration.setJsonSerializer(jsonSerializerFactory.create());
+            configuration.setJsonSerializer(jsonSerializer);
+
+            configuration.setDebugEnabled(this.debugEnabled);
 
             return configuration;
         }

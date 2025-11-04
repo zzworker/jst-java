@@ -3,6 +3,8 @@ package io.github.ieu.jst;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 
+import java.lang.reflect.Type;
+
 public class Jackson2JstJsonSerializer implements JstJsonSerializer {
     private final ObjectMapper objectMapper;
 
@@ -20,5 +22,12 @@ public class Jackson2JstJsonSerializer implements JstJsonSerializer {
     @SneakyThrows
     public <T> T deserialize(String content, Class<T> targetClass) {
         return objectMapper.readValue(content, targetClass);
+    }
+
+    @Override
+    @SneakyThrows
+    @SuppressWarnings("unchecked")
+    public <T> T deserialize(String content, Type targetType) {
+        return (T) objectMapper.readValue(content, objectMapper.getTypeFactory().constructType(targetType));
     }
 }

@@ -26,7 +26,7 @@ class JstAutoConfigurationTest {
     @Test
     void shouldBeDisabledWhenEnabledIsFalse() {
         contextRunner
-                .withPropertyValues(JstConfigurationProperties.PROPERTY_PREFIX + ".enabled=false")
+                .withPropertyValues("jst.enabled=false")
                 .run(context -> {
                     assertThat(context).doesNotHaveBean(JstConfiguration.class);
                     assertThat(context).doesNotHaveBean(JstClient.class);
@@ -37,9 +37,9 @@ class JstAutoConfigurationTest {
     void shouldConstructBeanWhenNotPropertiesSet() {
         contextRunner
                 .withPropertyValues(
-                        JstConfigurationProperties.PROPERTY_PREFIX + ".endpoint=https://dev-api.jushuitan.com",
-                        JstConfigurationProperties.PROPERTY_PREFIX + ".credential.app-key=b0b7d1db226d4216a3d58df9ffa2dde5",
-                        JstConfigurationProperties.PROPERTY_PREFIX + ".credential.app-secret=99c4cef262f34ca882975a7064de0b87"
+                        "jst.endpoint=https://dev-api.jushuitan.com",
+                        "jst.credential.app-key=b0b7d1db226d4216a3d58df9ffa2dde5",
+                        "jst.credential.app-secret=99c4cef262f34ca882975a7064de0b87"
                 )
                 .run(context -> {
                     assertThat(context).hasSingleBean(JstConfiguration.class);
@@ -152,6 +152,11 @@ class JstAutoConfigurationTest {
 
                 @Override
                 public <T> T deserialize(String content, Class<T> targetType) {
+                    throw new UnsupportedOperationException("deserialize not implemented");
+                }
+
+                @Override
+                public <T> T deserialize(String content, java.lang.reflect.Type targetType) {
                     throw new UnsupportedOperationException("deserialize not implemented");
                 }
             }

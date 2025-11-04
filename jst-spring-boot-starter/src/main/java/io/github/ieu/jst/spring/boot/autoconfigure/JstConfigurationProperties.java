@@ -3,7 +3,7 @@ package io.github.ieu.jst.spring.boot.autoconfigure;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = JstConfigurationProperties.PROPERTY_PREFIX)
+@ConfigurationProperties(JstConfigurationProperties.PROPERTY_PREFIX)
 @Data
 public class JstConfigurationProperties {
 
@@ -12,6 +12,7 @@ public class JstConfigurationProperties {
     private String endpoint;
     private Credential credential;
     private TokenStore tokenStore;
+    private boolean debugEnabled;
 
     @Data
     public static class Credential {

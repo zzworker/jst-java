@@ -21,7 +21,7 @@ public class JstGetVirtualStockResponse {
 
     private Boolean hasNext;
 
-    private java.util.List<Data> data;
+    private JstGetVirtualStockResponse.Data data;
 
     @lombok.Data
     public static class Data {

@@ -20,6 +20,7 @@ public abstract class AbstractJstBizClient {
     private final JstHttpClient httpClient;
     private final JstTokenStore tokenStore;
     private final JstJsonSerializer jsonSerializer;
+    private final boolean debugEnabled;
 
     protected AbstractJstBizClient(JstConfiguration configuration) {
         this.endpoint = configuration.getEndpoint();
@@ -28,6 +29,7 @@ public abstract class AbstractJstBizClient {
         this.httpClient = configuration.getHttpClient();
         this.tokenStore = configuration.getTokenStore();
         this.jsonSerializer = configuration.getJsonSerializer();
+        this.debugEnabled = configuration.isDebugEnabled();
     }
 
     protected <T, U> U execute(String path, T params, TypeReference<U> typeReference) {
@@ -58,12 +60,11 @@ public abstract class AbstractJstBizClient {
                 .setUri(endpoint.resolve(path))
                 .setHeaders(requestHeaders)
                 .setBody(params);
-        JstResponseEntity<U> responseEntity = httpClient.execute(
-                requestEntity,
-                targetType
-        );
+        
+        JstResponseEntity<U> responseEntity = httpClient.execute(requestEntity, targetType);
         return responseEntity.getBody();
     }
+
 
     private String getAccessToken() {
         String appKey = credential.getAppKey();

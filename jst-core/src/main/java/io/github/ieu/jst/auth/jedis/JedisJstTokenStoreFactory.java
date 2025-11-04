@@ -35,7 +35,7 @@ public class JedisJstTokenStoreFactory implements JstTokenStoreFactory {
 
         Integer port = this.port;
         if (port == null) {
-            port = 3306;
+            port = 6379;  // Redis默认端口
         }
 
         HostAndPort hostAndPort = new HostAndPort(host, port);

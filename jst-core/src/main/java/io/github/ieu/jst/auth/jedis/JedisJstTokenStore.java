@@ -32,7 +32,7 @@ public class JedisJstTokenStore extends AbstractCachingJstTokenStore implements 
             jedis.set(
                     cacheKey.getBytes(JstConvention.DEFAULT_CHARSET),
                     cacheValue.getBytes(JstConvention.DEFAULT_CHARSET),
-                    SetParams.setParams().exAt(expiresIn.getSeconds())
+                    SetParams.setParams().ex(expiresIn.getSeconds())
             );
         }
     }

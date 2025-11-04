@@ -1,5 +1,7 @@
 package io.github.ieu.jst.warehouse;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @lombok.Data
 public class JstGetVirtualStockResponse {
 
@@ -13,63 +15,102 @@ public class JstGetVirtualStockResponse {
      */
     private String msg;
 
-    private Number pageIndex;
+    /**
+     * 消息类型
+     */
+    @JsonProperty("msg_type")
+    private String msgType;
 
-    private Number pageSize;
+    /**
+     * 请求ID
+     */
+    @JsonProperty("request_id")
+    private String requestId;
 
-    private Number dataCount;
-
-    private Boolean hasNext;
-
-    private JstGetVirtualStockResponse.Data data;
+    private Data data;
 
     @lombok.Data
     public static class Data {
 
-        /**
-         * 商品编码
-         */
-        private String skuId;
+        @JsonProperty("page_index")
+        private Number pageIndex;
 
-        private java.util.List<Stock> stocks;
+        @JsonProperty("page_size")
+        private Number pageSize;
+
+        @JsonProperty("data_count")
+        private Number dataCount;
+
+        @JsonProperty("page_count")
+        private Number pageCount;
+
+        @JsonProperty("has_next")
+        private Boolean hasNext;
+
+        /**
+         * 商品库存数据列表
+         */
+        private java.util.List<Item> data;
 
         @lombok.Data
-        public static class Stock {
+        public static class Item {
 
             /**
-             * 虚拟仓编号
+             * 商品编码
              */
-            private Number lwhId;
+            @JsonProperty("sku_id")
+            private String skuId;
 
-            /**
-             * 虚拟仓名称
-             */
-            private String name;
+            private java.util.List<Stock> stocks;
 
-            /**
-             * 库存数
-             */
-            private Number qty;
+            @lombok.Data
+            public static class Stock {
 
-            /**
-             * 订单可用数
-             */
-            private Number orderAbleQty;
+                /**
+                 * 虚拟仓编号
+                 */
+                @JsonProperty("lwh_id")
+                private Number lwhId;
 
-            /**
-             * 订单占有数
-             */
-            private Number orderLock;
+                /**
+                 * 虚拟仓名称
+                 */
+                private String name;
 
-            /**
-             * 仓库待发数
-             */
-            private Number pickLock;
+                /**
+                 * 库存数
+                 */
+                private Number qty;
 
-            /**
-             * 最后修改时间
-             */
-            private String modified;
+                /**
+                 * 订单可用数
+                 */
+                @JsonProperty("order_able_qty")
+                private Number orderAbleQty;
+
+                /**
+                 * 订单占有数
+                 */
+                @JsonProperty("order_lock")
+                private Number orderLock;
+
+                /**
+                 * 仓库待发数
+                 */
+                @JsonProperty("pick_lock")
+                private Number pickLock;
+
+                /**
+                 * 采购数量
+                 */
+                @JsonProperty("purchase_qty")
+                private Number purchaseQty;
+
+                /**
+                 * 最后修改时间
+                 */
+                private String modified;
+            }
         }
     }
 }

@@ -48,10 +48,7 @@ public class JstQueryPurchaseResponse {
          */
         private java.util.List<Data> datas;
 
-        /**
-         * <div><a href="https://cdn.erp321.cn/jst-fed/5f065926-3029-4e58-aecc-c1954e11a990_1636_291.png" target="_blank">运营云仓编码</a></div>（入参是否返回运营云仓信息字段传true才会返回）
-         */
-        private Number lockLwhId;
+        
 
         @lombok.Data
         public static class Data {
@@ -145,6 +142,11 @@ public class JstQueryPurchaseResponse {
              * 仓库编号
              */
             private Integer wmsCoId;
+
+            /**
+             * <div><a href="https://cdn.erp321.cn/jst-fed/5f065926-3029-4e58-aecc-c1954e11a990_1636_291.png" target="_blank">运营云仓编码</a></div>（入参是否返回运营云仓信息字段传true才会返回）
+             */
+            private Number lockLwhId;
 
             /**
              * 收货状态:Timeout:预计收货超时,Received:全部入库,Part_Received:部分入库,Not_Received:未入库

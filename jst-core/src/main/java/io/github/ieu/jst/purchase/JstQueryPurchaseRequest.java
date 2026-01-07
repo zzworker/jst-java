@@ -37,5 +37,5 @@ public class JstQueryPurchaseRequest {
     /**
      * 是否返回运营云仓信息
      */
-    private String isLock;
+    private Boolean isLock;
 }

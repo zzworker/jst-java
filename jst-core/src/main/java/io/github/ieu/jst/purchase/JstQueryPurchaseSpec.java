@@ -61,7 +61,7 @@ public class JstQueryPurchaseSpec {
     /**
      * 是否返回运营云仓信息
      */
-    public JstQueryPurchaseSpec isLock(String isLock) {
+    public JstQueryPurchaseSpec isLock(Boolean isLock) {
         requestBuilder.isLock(isLock);
         return this;
     }

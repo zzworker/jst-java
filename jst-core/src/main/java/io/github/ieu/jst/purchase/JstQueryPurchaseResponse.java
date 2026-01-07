@@ -149,6 +149,16 @@ public class JstQueryPurchaseResponse {
             private Number lockLwhId;
 
             /**
+             * 运营云仓ID "lock_priority_json":"{\"149\":\"\"}"
+             */
+            private String lockPriorityJson;
+
+            /**
+             * 采购申请的明细ID
+             */
+            private java.util.List<Integer> lockIoId;
+
+            /**
              * 收货状态:Timeout:预计收货超时,Received:全部入库,Part_Received:部分入库,Not_Received:未入库
              */
             private String receiveStatus;

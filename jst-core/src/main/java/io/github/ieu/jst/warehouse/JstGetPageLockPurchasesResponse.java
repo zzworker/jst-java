@@ -80,6 +80,11 @@ public class JstGetPageLockPurchasesResponse {
              * 采购单号
              */
             private Number poId;
+
+            /**
+             * 采购申请明细id
+             */
+            private Number autoId;
         }
 
         /**

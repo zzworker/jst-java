@@ -147,9 +147,19 @@ public class JstQueryAllocateResponse {
             private String lockWhId;
 
             /**
+             * 调出虚拟仓名称
+             */
+            private String lockWhName;
+
+            /**
              * 调入虚拟仓编码
              */
             private String lockLinkWhId;
+
+            /**
+             * 调入虚拟仓名称
+             */
+            private String lockLinkWhName;
 
             /**
              * 外部单号

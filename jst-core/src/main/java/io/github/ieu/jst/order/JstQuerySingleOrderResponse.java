@@ -449,7 +449,7 @@ public class JstQuerySingleOrderResponse {
             /**
              * 跨境订单财务数据
              */
-            private CbFinance cbFinances;
+            private java.util.List<CbFinance> cbFinances;
 
             /**
              * 是否合并后订单

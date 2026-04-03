@@ -144,7 +144,7 @@ public class JstQueryAllocateResponse {
             /**
              * 调出虚拟仓编码
              */
-            private String lockWhId;
+            private Integer lockWhId;
 
             /**
              * 调出虚拟仓名称
@@ -154,7 +154,7 @@ public class JstQueryAllocateResponse {
             /**
              * 调入虚拟仓编码
              */
-            private String lockLinkWhId;
+            private Integer lockLinkWhId;
 
             /**
              * 调入虚拟仓名称

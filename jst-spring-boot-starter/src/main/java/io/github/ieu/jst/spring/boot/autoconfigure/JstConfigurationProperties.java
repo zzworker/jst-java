@@ -12,6 +12,7 @@ public class JstConfigurationProperties {
     private String endpoint;
     private Credential credential;
     private TokenStore tokenStore;
+    private Http http;
     private boolean debugEnabled;
 
     @Data
@@ -47,5 +48,13 @@ public class JstConfigurationProperties {
 
             private Boolean sslEnabled;
         }
+    }
+
+    @Data
+    public static class Http {
+
+        private Integer connectTimeout;
+
+        private Integer readTimeout;
     }
 }

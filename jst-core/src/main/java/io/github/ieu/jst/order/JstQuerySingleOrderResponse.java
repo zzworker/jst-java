@@ -437,6 +437,11 @@ public class JstQuerySingleOrderResponse {
             private String mergeSoId;
 
             /**
+             * 外部销售订单号
+             */
+            public String outerSoId;
+
+            /**
              * 买家指定物流
              */
             private String shipment;

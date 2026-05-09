@@ -52,7 +52,7 @@ public class JstQuerySingleOrderRequest {
     /**
      * ts时间戳，sql server中的行版本号，该字段查询防止分页过程中漏单。查询条件值是大于等于的关系
      */
-    private Integer startTs;
+    private Long startTs;
 
     /**
      * 是否查询总条数默认true，如果使用start_ts查询，该值传false否则影响查询效率

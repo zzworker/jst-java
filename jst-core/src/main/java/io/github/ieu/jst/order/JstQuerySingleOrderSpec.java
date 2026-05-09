@@ -85,7 +85,7 @@ public class JstQuerySingleOrderSpec {
     /**
      * ts时间戳，sql server中的行版本号，该字段查询防止分页过程中漏单。查询条件值是大于等于的关系
      */
-    public JstQuerySingleOrderSpec startTs(Integer startTs) {
+    public JstQuerySingleOrderSpec startTs(Long startTs) {
         requestBuilder.startTs(startTs);
         return this;
     }

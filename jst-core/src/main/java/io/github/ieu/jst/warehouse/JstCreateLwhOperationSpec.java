@@ -50,6 +50,11 @@ public class JstCreateLwhOperationSpec {
         return this;
     }
 
+    public JstCreateLwhOperationSpec remark(String remark) {
+        requestBuilder.remark(remark);
+        return this;
+    }
+
     public JstCreateLwhOperationSpec items(java.util.List<JstCreateLwhOperationRequest.Item> items) {
         requestBuilder.items(items);
         return this;

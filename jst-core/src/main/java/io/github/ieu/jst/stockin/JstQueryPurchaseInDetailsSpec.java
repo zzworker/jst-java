@@ -77,7 +77,7 @@ public class JstQueryPurchaseInDetailsSpec {
     /**
      * 时间戳，sql server中的行版本号，该字段查询防止分页过程中漏单,如果使用时间戳查询只需要跟分页条件共用 其它条件都不传
      */
-    public JstQueryPurchaseInDetailsSpec startTs(Integer startTs) {
+    public JstQueryPurchaseInDetailsSpec startTs(Number startTs) {
         requestBuilder.startTs(startTs);
         return this;
     }

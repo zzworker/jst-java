@@ -47,7 +47,7 @@ public class JstQueryPurchaseInDetailsRequest {
     /**
      * 时间戳，sql server中的行版本号，该字段查询防止分页过程中漏单,如果使用时间戳查询只需要跟分页条件共用 其它条件都不传
      */
-    private Integer startTs;
+    private Number startTs;
 
     /**
      * 是否查询总条数默认true，如果使用start_ts查询，该值传false否则影响查询效率

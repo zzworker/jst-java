@@ -29,6 +29,11 @@ public class JstCreateLwhOperationRequest {
      */
     private String type;
 
+    /**
+     * 备注
+     */
+    private String remark;
+
     private java.util.List<Item> items;
 
     /**

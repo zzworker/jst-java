@@ -165,7 +165,7 @@ public class JstQueryPurchaseInDetailsResponse {
             /**
              * 虚拟仓编码
              */
-            private Number lockWhId;
+            private String lockWhId;
 
             /**
              * 备注2  varchar(500)
@@ -249,6 +249,14 @@ public class JstQueryPurchaseInDetailsResponse {
                  * 款式编码 nvarchar(64)
                  */
                 private String iId;
+
+                public String getIId() {
+                    return iId;
+                }
+
+                public void setIId(String iId) {
+                    this.iId = iId;
+                }
 
                 /**
                  * 单位 nvarchar(20)

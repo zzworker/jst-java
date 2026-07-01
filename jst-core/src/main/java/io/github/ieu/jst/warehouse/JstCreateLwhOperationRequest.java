@@ -15,11 +15,6 @@ public class JstCreateLwhOperationRequest {
     private Boolean examine;
 
     /**
-     * 备注信息
-     */
-    private String remark;
-
-    /**
      * 仓储编码 若使用虚拟仓分仓则必填
      */
     private Number wmsCoId;

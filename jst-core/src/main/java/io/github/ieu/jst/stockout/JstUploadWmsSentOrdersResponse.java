@@ -1,5 +1,16 @@
 package io.github.ieu.jst.stockout;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 @lombok.Data
 public class JstUploadWmsSentOrdersResponse {
 
@@ -14,35 +25,61 @@ public class JstUploadWmsSentOrdersResponse {
     private String msg;
 
     /**
-     * data节点返回的o_id字段对应的值为传入的出仓io_id
+     * 返回的数据字段，正常与异常的结构不同，需要自定义反序列化器
      */
-    private DataWrap data;
+    @JsonDeserialize(using = DataDeserializer.class)
+    private List<Data> data;
+
+    @lombok.Data
+    public static class Data {
+
+        /**
+         * 执行结果
+         */
+        private String msg;
+
+        /**
+         * 是否成功
+         */
+        private Boolean issuccess;
+
+        /**
+         * 出库单号，对应传入的出仓 io_id
+         */
+        @JsonProperty("o_id")
+        private Integer oId;
+    }
 
     /**
-     * data节点返回的o_id字段对应的值为传入的出仓io_id
+     * 自定义反序列化器，兼容两种格式：
+     * 1. {"data": [...]}          -> 失败时，data 直接是数组
+     * 2. {"data": {"data": [...]}} -> 成功时，data 是嵌套对象
      */
-    @lombok.Data
-    public static class DataWrap {
+    public static class DataDeserializer extends JsonDeserializer<List<Data>> {
 
-        private java.util.List<Data> data;
+        @Override
+        public List<Data> deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+            List<Data> result = new ArrayList<>();
 
-        @lombok.Data
-        public static class Data {
+            if (p.currentToken() == JsonToken.START_ARRAY) {
+                // 格式1: data 直接是数组
+                result = ctxt.readValue(p, ctxt.getTypeFactory().constructCollectionType(List.class, Data.class));
 
-            /**
-             * 执行结果
-             */
-            private String msg;
+            } else if (p.currentToken() == JsonToken.START_OBJECT) {
+                // 格式2: data 是对象 {"data": [...]}
+                while (p.nextToken() != JsonToken.END_OBJECT) {
+                    String fieldName = p.currentName();
+                    p.nextToken();
 
-            /**
-             * 是否成功
-             */
-            private Boolean issuccess;
+                    if ("data".equals(fieldName) && p.currentToken() == JsonToken.START_ARRAY) {
+                        result = ctxt.readValue(p, ctxt.getTypeFactory().constructCollectionType(List.class, Data.class));
+                    } else {
+                        p.skipChildren();
+                    }
+                }
+            }
 
-            /**
-             * 出库单号
-             */
-            private Integer oId;
+            return result;
         }
     }
 }

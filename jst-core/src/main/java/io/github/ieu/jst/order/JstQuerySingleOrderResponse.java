@@ -1,5 +1,7 @@
 package io.github.ieu.jst.order;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @lombok.Data
 public class JstQuerySingleOrderResponse {
 
@@ -429,6 +431,7 @@ public class JstQuerySingleOrderResponse {
             /**
              * 被合并被拆分的订单内部单号
              */
+            @JsonProperty("link_o_id")
             private String linkOId;
 
             /**

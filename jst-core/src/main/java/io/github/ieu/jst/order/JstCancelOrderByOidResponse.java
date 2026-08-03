@@ -13,5 +13,5 @@ public class JstCancelOrderByOidResponse {
      */
     private String msg;
 
-    private String data;
+    private Object data;
 }
